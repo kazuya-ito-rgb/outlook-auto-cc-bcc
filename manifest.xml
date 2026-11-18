@@ -8,16 +8,16 @@
   <!-- アドインの一意な識別子（GUID） -->
   <Id>b78a9c2e-4e6f-4091-a5bf-85f09623d9a1</Id>
   <Version>1.0.0.0</Version>
-  <ProviderName>Personal / Organization</ProviderName>
+  <ProviderName>kazuya-ito-rgb</ProviderName>
   <DefaultLocale>ja-JP</DefaultLocale>
   <DisplayName DefaultValue="自動CC/BCCアドイン" />
   <Description DefaultValue="メール新規作成時に指定したCC・BCCアドレスを自動入力します。" />
-  <IconUrl DefaultValue="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/assets/icon-32.png" />
-  <HighResolutionIconUrl DefaultValue="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/assets/icon-80.png" />
+  <IconUrl DefaultValue="https://kazuya-ito-rgb.github.io/outlook-auto-cc-bcc/assets/icon-32.png" />
+  <HighResolutionIconUrl DefaultValue="https://kazuya-ito-rgb.github.io/outlook-auto-cc-bcc/assets/icon-80.png" />
 
-  <SupportUrl DefaultValue="https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME" />
+  <SupportUrl DefaultValue="https://github.com/kazuya-ito-rgb/outlook-auto-cc-bcc" />
   <AppDomains>
-    <AppDomain>https://YOUR_GITHUB_USERNAME.github.io</AppDomain>
+    <AppDomain>https://kazuya-ito-rgb.github.io</AppDomain>
   </AppDomains>
 
   <Hosts>
@@ -93,14 +93,14 @@
 
       <Resources>
         <bt:Images>
-          <bt:Image id="icon16" DefaultValue="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/assets/icon-16.png" />
-          <bt:Image id="icon32" DefaultValue="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/assets/icon-32.png" />
-          <bt:Image id="icon80" DefaultValue="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/assets/icon-80.png" />
+          <bt:Image id="icon16" DefaultValue="https://kazuya-ito-rgb.github.io/outlook-auto-cc-bcc/assets/icon-16.png" />
+          <bt:Image id="icon32" DefaultValue="https://kazuya-ito-rgb.github.io/outlook-auto-cc-bcc/assets/icon-32.png" />
+          <bt:Image id="icon80" DefaultValue="https://kazuya-ito-rgb.github.io/outlook-auto-cc-bcc/assets/icon-80.png" />
         </bt:Images>
         <bt:Urls>
-          <bt:Url id="LaunchEvent.Url" DefaultValue="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/src/launchevent.html" />
-          <bt:Url id="LaunchEvent.Js" DefaultValue="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/src/launchevent.js" />
-          <bt:Url id="Taskpane.Url" DefaultValue="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/src/taskpane.html" />
+          <bt:Url id="LaunchEvent.Url" DefaultValue="https://kazuya-ito-rgb.github.io/outlook-auto-cc-bcc/src/launchevent.html" />
+          <bt:Url id="LaunchEvent.Js" DefaultValue="https://kazuya-ito-rgb.github.io/outlook-auto-cc-bcc/src/launchevent.js" />
+          <bt:Url id="Taskpane.Url" DefaultValue="https://kazuya-ito-rgb.github.io/outlook-auto-cc-bcc/src/taskpane.html" />
         </bt:Urls>
         <bt:ShortStrings>
           <bt:String id="groupLabel" DefaultValue="宛先自動挿入" />
