@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+           xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides"
+           xsi:type="MailApp">
+
+  <!-- アドインの一意な識別子（GUID） -->
+  <Id>b78a9c2e-4e6f-4091-a5bf-85f09623d9a1</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Personal / Organization</ProviderName>
+  <DefaultLocale>ja-JP</DefaultLocale>
+  <DisplayName DefaultValue="自動CC/BCCアドイン" />
+  <Description DefaultValue="メール新規作成時に指定したCC・BCCアドレスを自動入力します。" />
+  <IconUrl DefaultValue="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/assets/icon-32.png" />
+  <HighResolutionIconUrl DefaultValue="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/assets/icon-80.png" />
+
+  <SupportUrl DefaultValue="https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME" />
+  <AppDomains>
+    <AppDomain>https://YOUR_GITHUB_USERNAME.github.io</AppDomain>
+  </AppDomains>
+
+  <Hosts>
+    <Host Name="Mailbox" />
+  </Hosts>
+
+  <Requirements>
+    <Sets>
+      <Set Name="Mailbox" MinVersion="1.8" />
+    </Sets>
+  </Requirements>
+
+  <!-- メールアイテム作成・読み取り権限 -->
+  <Permissions>ReadWriteItem</Permissions>
+  <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit" />
+  <DisableEntityHighlighting>false</DisableEntityHighlighting>
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.0" xsi:type="VersionOverridesV1_0">
+    <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
+      <Requirements>
+        <bt:Sets DefaultMinVersion="1.8">
+          <bt:Set Name="Mailbox" />
+        </bt:Sets>
+      </Requirements>
+
+      <Hosts>
+        <Host xsi:type="MailHost">
+          <!-- イベントベース起動用のJSランタイム指定 -->
+          <Runtimes>
+            <Runtime resid="LaunchEvent.Url">
+              <Override type="javascript" resid="LaunchEvent.Js" />
+            </Runtime>
+          </Runtimes>
+
+          <DesktopFormFactor>
+            <FunctionFile resid="LaunchEvent.Url" />
+
+            <!-- イベントベースの起動設定：メール新規作成時にバックグラウンドで発火 -->
+            <ExtensionPoint xsi:type="LaunchEvent">
+              <LaunchEvents>
+                <LaunchEvent Type="OnNewMessageCompose" FunctionName="onNewMessageComposeHandler" />
+              </LaunchEvents>
+              <SourceLocation resid="LaunchEvent.Url" />
+            </ExtensionPoint>
+
+            <!-- メール作成画面のリボン/メニューに「設定」ボタンを表示 -->
+            <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+              <OfficeTab id="TabDefault">
+                <Group id="msgComposeCmdGroup">
+                  <Label resid="groupLabel" />
+                  <Control xsi:type="Button" id="btnSettings">
+                    <Label resid="btnSettingsLabel" />
+                    <Supertip>
+                      <Title resid="btnSettingsTitle" />
+                      <Description resid="btnSettingsDesc" />
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="icon16" />
+                      <bt:Image size="32" resid="icon32" />
+                      <bt:Image size="80" resid="icon80" />
+                    </Icon>
+                    <Action xsi:type="ShowTaskpane">
+                      <SourceLocation resid="Taskpane.Url" />
+                    </Action>
+                  </Control>
+                </Group>
+              </OfficeTab>
+            </ExtensionPoint>
+
+          </DesktopFormFactor>
+        </Host>
+      </Hosts>
+
+      <Resources>
+        <bt:Images>
+          <bt:Image id="icon16" DefaultValue="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/assets/icon-16.png" />
+          <bt:Image id="icon32" DefaultValue="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/assets/icon-32.png" />
+          <bt:Image id="icon80" DefaultValue="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/assets/icon-80.png" />
+        </bt:Images>
+        <bt:Urls>
+          <bt:Url id="LaunchEvent.Url" DefaultValue="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/src/launchevent.html" />
+          <bt:Url id="LaunchEvent.Js" DefaultValue="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/src/launchevent.js" />
+          <bt:Url id="Taskpane.Url" DefaultValue="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/src/taskpane.html" />
+        </bt:Urls>
+        <bt:ShortStrings>
+          <bt:String id="groupLabel" DefaultValue="宛先自動挿入" />
+          <bt:String id="btnSettingsLabel" DefaultValue="CC/BCC設定" />
+          <bt:String id="btnSettingsTitle" DefaultValue="自動CC/BCC設定" />
+        </bt:ShortStrings>
+        <bt:LongStrings>
+          <bt:String id="btnSettingsDesc" DefaultValue="メール作成時に自動入力するCCおよびBCCのメールアドレスを設定します。" />
+        </bt:LongStrings>
+      </Resources>
+    </VersionOverrides>
+  </VersionOverrides>
+</OfficeApp>
