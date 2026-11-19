@@ -7,7 +7,7 @@
 
   <!-- アドインの一意な識別子（GUID） -->
   <Id>b78a9c2e-4e6f-4091-a5bf-85f09623d9a1</Id>
-  <Version>1.0.0.0</Version>
+  <Version>1.0.0.1</Version>
   <ProviderName>kazuya-ito-rgb</ProviderName>
   <DefaultLocale>ja-JP</DefaultLocale>
   <DisplayName DefaultValue="自動CC/BCCアドイン" />
@@ -24,21 +24,32 @@
     <Host Name="Mailbox" />
   </Hosts>
 
+  <!-- OnNewMessageCompose は Mailbox 1.10 以上が必要 -->
   <Requirements>
     <Sets>
-      <Set Name="Mailbox" MinVersion="1.8" />
+      <Set Name="Mailbox" MinVersion="1.10" />
     </Sets>
   </Requirements>
 
+  <FormSettings>
+    <Form xsi:type="ItemEdit">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://kazuya-ito-rgb.github.io/outlook-auto-cc-bcc/src/taskpane.html" />
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+
   <!-- メールアイテム作成・読み取り権限 -->
   <Permissions>ReadWriteItem</Permissions>
-  <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit" />
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit" />
+  </Rule>
   <DisableEntityHighlighting>false</DisableEntityHighlighting>
 
-  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.0" xsi:type="VersionOverridesV1_0">
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
     <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
       <Requirements>
-        <bt:Sets DefaultMinVersion="1.8">
+        <bt:Sets DefaultMinVersion="1.10">
           <bt:Set Name="Mailbox" />
         </bt:Sets>
       </Requirements>
@@ -55,7 +66,7 @@
           <DesktopFormFactor>
             <FunctionFile resid="LaunchEvent.Url" />
 
-            <!-- イベントベースの起動設定：メール新規作成時にバックグラウンドで発火 -->
+            <!-- メール新規作成時にバックグラウンドで発火 -->
             <ExtensionPoint xsi:type="LaunchEvent">
               <LaunchEvents>
                 <LaunchEvent Type="OnNewMessageCompose" FunctionName="onNewMessageComposeHandler" />
@@ -63,7 +74,7 @@
               <SourceLocation resid="LaunchEvent.Url" />
             </ExtensionPoint>
 
-            <!-- メール作成画面のリボン/メニューに「設定」ボタンを表示 -->
+            <!-- メール作成画面のリボンに「設定」ボタンを表示 -->
             <ExtensionPoint xsi:type="MessageComposeCommandSurface">
               <OfficeTab id="TabDefault">
                 <Group id="msgComposeCmdGroup">
@@ -86,7 +97,6 @@
                 </Group>
               </OfficeTab>
             </ExtensionPoint>
-
           </DesktopFormFactor>
         </Host>
       </Hosts>
